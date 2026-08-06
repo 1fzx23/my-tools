@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>我的工具箱 · Toolbox</title>
+<style>
+  :root {
+    --bg: #0b0e14;
+    --bg-soft: #11151f;
+    --bg-card: #151b27;
+    --border: #232b3a;
+    --border-soft: #1b2230;
+    --text: #e6edf3;
+    --text-dim: #9aa7b8;
+    --text-faint: #66748a;
+    --accent: #5eead4;
+    --accent-2: #7dd3fc;
+    --green: #4ade80;
+    --blue: #60a5fa;
+    --orange: #fb923c;
+    --red: #f472b6;
+    --shadow: 0 10px 40px rgba(0,0,0,.45);
+    --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(900px 400px at 80% -10%, rgba(94,234,212,.08), transparent 60%),
+      radial-gradient(700px 360px at 0% 0%, rgba(125,211,252,.07), transparent 55%),
+      var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- Header ---------- */
+  header.nav {
+    position: sticky; top: 0; z-index: 20;
+    backdrop-filter: blur(10px);
+    background: rgba(11,14,20,.72);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .3px; }
+  .brand .dot { width: 12px; height: 12px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow: 0 0 14px rgba(94,234,212,.6); }
+  .brand small { color: var(--text-faint); font-weight: 500; font-family: var(--mono); }
+  .nav-links { display: flex; gap: 22px; font-size: 14px; color: var(--text-dim); }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 86px 0 56px; text-align: center; }
+  .badge-cadence {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--accent);
+    border: 1px solid var(--border); background: var(--bg-soft);
+    padding: 6px 14px; border-radius: 999px; margin-bottom: 22px;
+    font-family: var(--mono);
+  }
+  .hero h1 {
+    font-size: clamp(34px, 6vw, 58px); margin: 0 0 14px;
+    font-weight: 800; letter-spacing: -1px;
+    background: linear-gradient(120deg, #fff 20%, var(--accent) 60%, var(--accent-2));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero p.sub { color: var(--text-dim); font-size: 18px; max-width: 640px; margin: 0 auto 30px; }
+  .stats { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+  .stat {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 16px 22px; min-width: 130px;
+  }
+  .stat .n { font-size: 26px; font-weight: 800; color: var(--text); }
+  .stat .n span { font-size: 14px; color: var(--text-faint); font-weight: 500; }
+  .stat .l { font-size: 12px; color: var(--text-faint); font-family: var(--mono); text-transform: uppercase; letter-spacing: 1px; }
+
+  /* ---------- Section ---------- */
+  section { padding: 40px 0; }
+  .sec-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 24px; }
+  .sec-head h2 { font-size: 24px; margin: 0; font-weight: 700; }
+  .sec-head .hint { color: var(--text-faint); font-size: 13px; font-family: var(--mono); }
+
+  /* ---------- Tool grid ---------- */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; }
+  .card {
+    position: relative; background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 22px; transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    overflow: hidden;
+  }
+  .card::before {
+    content: ""; position: absolute; inset: 0 0 auto 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2)); opacity: .0; transition: opacity .18s;
+  }
+  .card:hover { transform: translateY(-4px); border-color: #2f3b50; box-shadow: var(--shadow); }
+  .card:hover::before { opacity: 1; }
+  .card .top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .card .emoji {
+    width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center;
+    font-size: 24px; background: var(--bg-soft); border: 1px solid var(--border);
+  }
+  .card h3 { margin: 0; font-size: 18px; font-weight: 700; }
+  .card .tagline { color: var(--text-faint); font-size: 13px; font-family: var(--mono); }
+  .card .desc { color: var(--text-dim); font-size: 14px; min-height: 42px; margin: 6px 0 14px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+  .tag { font-size: 11px; color: var(--text-dim); border: 1px solid var(--border); padding: 3px 9px; border-radius: 999px; font-family: var(--mono); }
+  .card .foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .lvl { font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; font-family: var(--mono); }
+  .lvl.l1 { color: var(--green); background: rgba(74,222,128,.12); }
+  .lvl.l2 { color: var(--blue); background: rgba(96,165,250,.12); }
+  .lvl.l3 { color: var(--orange); background: rgba(251,146,60,.12); }
+  .lvl.l4 { color: var(--red); background: rgba(244,114,182,.12); }
+  .btns { display: flex; gap: 8px; }
+  .btn {
+    font-size: 13px; font-weight: 600; padding: 7px 12px; border-radius: 9px;
+    border: 1px solid var(--border); background: var(--bg-soft); color: var(--text);
+    transition: background .15s, border-color .15s; cursor: pointer;
+  }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn.primary { background: linear-gradient(135deg, rgba(94,234,212,.18), rgba(125,211,252,.18)); border-color: rgba(94,234,212,.4); }
+  .btn.primary:hover { color: #fff; }
+
+  /* ---------- Roadmap ---------- */
+  .road { display: grid; gap: 14px; }
+  .road-item {
+    display: flex; gap: 16px; align-items: flex-start;
+    background: var(--bg-soft); border: 1px solid var(--border-soft);
+    border-radius: 14px; padding: 16px 20px;
+  }
+  .road-item .step {
+    flex: none; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center;
+    font-family: var(--mono); font-weight: 700; font-size: 13px; color: var(--bg);
+    background: var(--text-faint);
+  }
+  .road-item .step.l2 { background: var(--blue); }
+  .road-item .step.l3 { background: var(--orange); }
+  .road-item .step.l4 { background: var(--red); }
+  .road-item .r-body h4 { margin: 0 0 4px; font-size: 15px; }
+  .road-item .r-body p { margin: 0; color: var(--text-faint); font-size: 13px; }
+  .road-item .r-meta { margin-left: auto; text-align: right; flex: none; }
+  .road-item .r-meta .when { font-size: 12px; color: var(--text-faint); font-family: var(--mono); }
+
+  /* ---------- How ---------- */
+  .how { background: var(--bg-soft); border: 1px solid var(--border-soft); border-radius: 16px; padding: 24px; }
+  .how h3 { margin-top: 0; font-size: 17px; }
+  .how ol { margin: 10px 0 0; padding-left: 20px; color: var(--text-dim); font-size: 14px; }
+  .how code { font-family: var(--mono); background: var(--bg); border: 1px solid var(--border); padding: 1px 6px; border-radius: 6px; color: var(--accent-2); font-size: 13px; }
+  .how pre { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 14px; overflow: auto; font-family: var(--mono); font-size: 13px; color: var(--text-dim); }
+
+  footer { border-top: 1px solid var(--border-soft); padding: 30px 0 50px; color: var(--text-faint); font-size: 13px; text-align: center; }
+  footer a { color: var(--accent); }
+  .empty { color: var(--text-faint); font-family: var(--mono); padding: 30px; text-align: center; border: 1px dashed var(--border); border-radius: 14px; }
+
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .road-item .r-meta { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <div class="brand"><span class="dot"></span> 我的工具箱 <small>/ toolbox</small></div>
+    <nav class="nav-links">
+      <a href="#tools">工具</a>
+      <a href="#roadmap">路线图</a>
+      <a href="#how">机制</a>
+      <a href="https://github.com/1fzx23" target="_blank" rel="noopener">GitHub ↗</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="badge-cadence">⏱ 每两周一个 · 难度逐步递增</div>
+    <h1>我的工具箱</h1>
+    <p class="sub">一个人，一台电脑，每两周打磨一个解决真实问题的实用小工具。工具越做越难，页面也越来越好玩。</p>
+    <div class="stats">
+      <div class="stat"><div class="n" id="stat-count">0</div><div class="l">已发布工具</div></div>
+      <div class="stat"><div class="n">2<span> 周</span></div><div class="l">发布节奏</div></div>
+      <div class="stat"><div class="n" id="stat-level">—</div><div class="l">当前最高难度</div></div>
+      <div class="stat"><div class="n">100<span>%</span></div><div class="l">开源</div></div>
+    </div>
+  </div>
+
+  <!-- TOOLS -->
+  <section id="tools">
+    <div class="sec-head">
+      <h2>工具一览</h2>
+      <span class="hint" id="tools-hint">// TOOLS registry</span>
+    </div>
+    <div class="grid" id="tool-grid"></div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section id="roadmap">
+    <div class="sec-head">
+      <h2>难度路线图</h2>
+      <span class="hint">// 越往后越硬核</span>
+    </div>
+    <div class="road" id="roadmap-list"></div>
+  </section>
+
+  <!-- HOW -->
+  <section id="how">
+    <div class="sec-head"><h2>自动开发机制</h2></div>
+    <div class="how">
+      <h3>每两周自动启动一轮</h3>
+      <ol>
+        <li>周一定时检测：若本周期尚未开发新工具，则当天自动开始。</li>
+        <li>周六早上的二次检测：若仍为空，则当天补开发，形成双保险。</li>
+        <li>每个工具都遵循 <code>构思 → 编码 → 测试 → 发布到 GitHub → 写展示页</code> 的流程。</li>
+        <li><b>难度递进</b>：下一个工具的难度等级必须高于（或持平于）上一个，逐步挑战更复杂的问题。</li>
+      </ol>
+      <h3 style="margin-top:18px;">如何新增一个工具（给未来的我）</h3>
+      <p style="color:var(--text-faint);font-size:14px;margin:0 0 8px;">只需在下方 <code>TOOLS</code> 数组追加一条记录，并把它放进对应仓库即可：</p>
+      <pre>const TOOLS = [
+  {
+    id: "dupfinder",
+    name: "DupFinder",
+    emoji: "🔍",
+    tagline: "本地重复文件查找器",
+    desc: "基于 SHA-256 分块哈希，纯本地扫描，支持只读预览与一键清理。",
+    level: 1,                 // 1 入门 / 2 进阶 / 3 高级 / 4 专家
+    tags: ["Python", "CLI", "文件工具"],
+    date: "2026-08-06",
+    repo: "https://github.com/1fzx23/dupfinder",
+    demo: "https://1fzx23.github.io/dupfinder/"
+  },
+  // 👉 在这里加新工具，level 要比上一个更大
+];</pre>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  由 WorkBuddy 自动维护 · 每个工具独立开源 ·
+  <a href="https://github.com/1fzx23" target="_blank" rel="noopener">github.com/1fzx23</a>
+</footer>
+
+<script>
+  /* =========================================================
+   *  TOOL REGISTRY — 新增工具只需在此数组追加一条记录
+   *  level: 1 入门 / 2 进阶 / 3 高级 / 4 专家（必须逐步递增）
+   * ========================================================= */
+  const TOOLS = [
+    {
+      id: "dupfinder",
+      name: "DupFinder",
+      emoji: "🔍",
+      tagline: "本地重复文件查找器",
+      desc: "基于 SHA-256 分块哈希，纯本地扫描，支持只读预览与一键清理；内置浏览器版纯前端演示。",
+      level: 1,
+      tags: ["Python", "CLI", "文件工具"],
+      date: "2026-08-06",
+      repo: "https://github.com/1fzx23/dupfinder",
+      demo: "https://1fzx23.github.io/dupfinder/"
+    }
+    // 👉 下一个工具加在这里，level 取 2、3、4 …… 逐步变难
+  ];
+
+  /* 路线图：规划中的更硬核工具（仅展示，未发布） */
+  const ROADMAP = [
+    { level: 2, name: "MarkNote", title: "本地 Markdown 笔记 + 全文检索", desc: "零依赖的本地笔记库，支持标签、双向链接与模糊全文搜索。", when: "第 2 个" },
+    { level: 3, name: "MockLite", title: "零配置本地 API Mock 服务器", desc: "一条命令起服务，按目录自动生成 REST 接口与假数据，支持延迟与错误注入。", when: "第 3 个" },
+    { level: 4, name: "SnapGuard", title: "文件变更监控 + 自动版本备份守护进程", desc: "常驻后台，监听目录变更并生成去重快照，可回滚到任意时间点。", when: "第 4 个" }
+  ];
+
+  const LEVEL_NAME = { 1: "入门", 2: "进阶", 3: "高级", 4: "专家" };
+
+  function renderTools() {
+    const grid = document.getElementById("tool-grid");
+    if (!TOOLS.length) { grid.innerHTML = '<div class="empty">// 暂无工具，敬请期待下一次发布</div>'; return; }
+    grid.innerHTML = TOOLS.map(t => `
+      <div class="card">
+        <div class="top">
+          <div class="emoji">${t.emoji}</div>
+          <div>
+            <h3>${t.name}</h3>
+            <div class="tagline">${t.tagline}</div>
+          </div>
+        </div>
+        <div class="desc">${t.desc}</div>
+        <div class="tags">${t.tags.map(x => `<span class="tag">${x}</span>`).join("")}</div>
+        <div class="foot">
+          <span class="lvl l${t.level}">${LEVEL_NAME[t.level]} · L${t.level}</span>
+          <div class="btns">
+            ${t.demo ? `<a class="btn primary" href="${t.demo}" target="_blank" rel="noopener">演示 ↗</a>` : ""}
+            <a class="btn" href="${t.repo}" target="_blank" rel="noopener">源码</a>
+          </div>
+        </div>
+      </div>`).join("");
+
+    // stats
+    document.getElementById("stat-count").textContent = TOOLS.length;
+    const maxLevel = Math.max(...TOOLS.map(t => t.level));
+    document.getElementById("stat-level").textContent = LEVEL_NAME[maxLevel];
+    document.getElementById("tools-hint").textContent = `// ${TOOLS.length} tool(s) · max level L${maxLevel}`;
+  }
+
+  function renderRoadmap() {
+    const list = document.getElementById("roadmap-list");
+    list.innerHTML = ROADMAP.map((r, i) => `
+      <div class="road-item">
+        <div class="step l${r.level}">${r.level}</div>
+        <div class="r-body">
+          <h4>${r.name} — ${r.title}</h4>
+          <p>${r.desc}</p>
+        </div>
+        <div class="r-meta">
+          <div class="lvl l${r.level}" style="display:inline-block;margin-bottom:4px;">${LEVEL_NAME[r.level]}</div>
+          <div class="when">${r.when}</div>
+        </div>
+      </div>`).join("");
+  }
+
+  renderTools();
+  renderRoadmap();
+</script>
+</body>
+</html>
