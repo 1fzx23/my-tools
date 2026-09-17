@@ -138,6 +138,7 @@
   .road-item .step.l2 { background: var(--blue); }
   .road-item .step.l3 { background: var(--orange); }
   .road-item .step.l4 { background: var(--red); }
+  .road-item .step.l5 { background: #c084fc; }
   .road-item .r-body h4 { margin: 0 0 4px; font-size: 15px; }
   .road-item .r-body p { margin: 0; color: var(--text-faint); font-size: 13px; }
   .road-item .r-meta { margin-left: auto; text-align: right; flex: none; }
@@ -311,7 +312,19 @@
       repo: "https://github.com/1fzx23/snapguard",
       demo: "https://1fzx23.github.io/snapguard/"
     }
-    // 👉 下一个工具加在这里，level 取 4 或更高 …… 逐步变难
+    {
+      id: "repodoctor",
+      name: "RepoDoctor",
+      emoji: "🩺",
+      tagline: "Git 仓库健康诊断师",
+      desc: "扫描本地 Git 仓库，发现历史大 blob、长期未更新分支、潜在敏感信息、未跟踪文件、未提交改动以及落后于远程的分支；支持 JSON/Markdown 报告与 CI 集成。纯 Python 标准库实现。",
+      level: 5,
+      tags: ["Python", "CLI", "Git", "DevOps", "零依赖"],
+      date: "2026-09-17",
+      repo: "https://github.com/1fzx23/repodoctor",
+      demo: "https://1fzx23.github.io/repodoctor/"
+    }
+    // 👉 下一个工具加在这里，level 取 5 或更高 …… 逐步变难
   ];
 
   /* 路线图：规划中的更硬核工具（仅展示，未发布） */
@@ -320,7 +333,7 @@
     { level: 4, name: "SnapGuard", title: "文件变更监控 + 自动版本备份守护进程", desc: "常驻后台，监听目录变更并生成去重快照，可回滚到任意时间点。", when: "第 4 个" }
   ];
 
-  const LEVEL_NAME = { 1: "入门", 2: "进阶", 3: "高级", 4: "专家" };
+  const LEVEL_NAME = { 1: "入门", 2: "进阶", 3: "高级", 4: "专家", 5: "大师" };
 
   function renderTools() {
     const grid = document.getElementById("tool-grid");
