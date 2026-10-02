@@ -311,7 +311,7 @@
       date: "2026-08-31",
       repo: "https://github.com/1fzx23/snapguard",
       demo: "https://1fzx23.github.io/snapguard/"
-    }
+    },
     {
       id: "repodoctor",
       name: "RepoDoctor",
@@ -324,16 +324,28 @@
       repo: "https://github.com/1fzx23/repodoctor",
       demo: "https://1fzx23.github.io/repodoctor/"
     }
-    // 👉 下一个工具加在这里，level 取 5 或更高 …… 逐步变难
+    {
+      id: "httpbench",
+      name: "HttpBench",
+      emoji: "⚡",
+      tagline: "轻量级 HTTP 压测工具",
+      desc: "纯 Python 标准库实现的 HTTP 性能测试工具：多线程并发压测、双模式运行（按请求数/持续时间）、完整延迟统计（P50~P99.9）、错误分析、终端 ASCII 直方图、JSON 与自包含 HTML 报告输出。零外部依赖。",
+      level: 7,
+      tags: ["Python", "CLI", "HTTP", "性能测试", "零依赖"],
+      date: "2026-10-02",
+      repo: "https://github.com/1fzx23/httpbench",
+      demo: "https://1fzx23.github.io/httpbench/"
+    }
+    // 👉 下一个工具加在这里，level 取 7 或更高 …… 逐步变难
   ];
 
   /* 路线图：规划中的更硬核工具（仅展示，未发布） */
   const ROADMAP = [
-    { level: 2, name: "MarkNote", title: "本地 Markdown 笔记 + 全文检索", desc: "零依赖的本地笔记库，支持标签、双向链接与模糊全文搜索。", when: "第 2 个" },
-    { level: 4, name: "SnapGuard", title: "文件变更监控 + 自动版本备份守护进程", desc: "常驻后台，监听目录变更并生成去重快照，可回滚到任意时间点。", when: "第 4 个" }
+    { level: 6, name: "LogLens", title: "日志实时分析 + 告警", desc: "tail 多日志文件，关键词高亮，正则过滤，自动统计错误率与响应时间分布。", when: "规划中" },
+    { level: 7, name: "CacheForge", title: "本地缓存清理与诊断", desc: "一键扫描并清理 npm/pip/cargo/gradle/docker 缓存，显示占用大小。", when: "规划中" }
   ];
 
-  const LEVEL_NAME = { 1: "入门", 2: "进阶", 3: "高级", 4: "专家", 5: "大师" };
+  const LEVEL_NAME = { 1: "入门", 2: "进阶", 3: "高级", 4: "专家", 5: "大师", 6: "宗师", 7: "传奇" };
 
   function renderTools() {
     const grid = document.getElementById("tool-grid");
