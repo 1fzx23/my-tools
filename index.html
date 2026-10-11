@@ -335,13 +335,24 @@
       date: "2026-10-02",
       repo: "https://github.com/1fzx23/httpbench",
       demo: "https://1fzx23.github.io/httpbench/"
+    },
+    {
+      id: "loglens",
+      name: "LogLens",
+      emoji: "📋",
+      tagline: "轻量级日志分析工具",
+      desc: "自动识别 Nginx/syslog/应用日志格式；统计级别与状态码分布、Top IP 与请求路径、时间线；把错误消息归一化聚类成可读的错误模式；按级别/时间/关键字/正则过滤（支持 stdin 管道）；一键产出自包含 HTML 报告。零外部依赖。",
+      level: 7,
+      tags: ["Python", "CLI", "日志", "分析", "零依赖"],
+      date: "2026-10-12",
+      repo: "https://github.com/1fzx23/loglens",
+      demo: "https://1fzx23.github.io/loglens/"
     }
     // 👉 下一个工具加在这里，level 取 7 或更高 …… 逐步变难
   ];
 
   /* 路线图：规划中的更硬核工具（仅展示，未发布） */
   const ROADMAP = [
-    { level: 6, name: "LogLens", title: "日志实时分析 + 告警", desc: "tail 多日志文件，关键词高亮，正则过滤，自动统计错误率与响应时间分布。", when: "规划中" },
     { level: 7, name: "CacheForge", title: "本地缓存清理与诊断", desc: "一键扫描并清理 npm/pip/cargo/gradle/docker 缓存，显示占用大小。", when: "规划中" }
   ];
 
